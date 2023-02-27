@@ -1,0 +1,14 @@
+# IDE
+.vscode
+.idea
+
+# packages
+node_modules
+
+# env
+.env
+.env.local
+
+# build outputs
+*.d.ts
+*.js

@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "CommonJS",
+    "outDir": "dist",
+    "lib": ["ES2021", "DOM"],
+    "declaration": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "noImplicitUseStrict": true,
+    "noImplicitAny": true
+  },
+  "include": ["./src/**/*.ts"],
+  "exclude": ["node_modules", "./**/*.test.ts"]
+}

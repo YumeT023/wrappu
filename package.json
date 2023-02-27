@@ -1,0 +1,19 @@
+{
+  "name": "wrappu",
+  "version": "1.0.0",
+  "author": "Yume Saiko",
+  "license": "ISC",
+  "description": "a framework that helps you to create a cli wrapper for node.js with ease",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest --passWithNoTests"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-typescript": "^7.18.6",
+    "@types/jest": "^29.2.4",
+    "jest": "^29.2.1",
+    "prettier": "^2.7.1",
+    "typescript": "^4.9.5"
+  }
+}
