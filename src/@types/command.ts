@@ -50,12 +50,20 @@ export interface CMDInterface {
    * @throws Error: when you attempt to register the same `arg name` twice
    * @return `this` to allow `cascading`
    */
-  arg(key: string, type?: ArgType): this;
+  arg(key: string, options?: ArgOptions): this;
 
   /**
    * ensure that the given args exist and haven't violated their type `Constraint`
    */
   validateArgsConstraints(args: SArgs): this;
+}
+
+/**
+ * each arg has specific `option/constraint`
+ */
+export interface ArgOptions {
+  asAlias?: boolean;
+  type?: ArgType;
 }
 
 /**
@@ -66,7 +74,7 @@ export type ArgKey = string;
 /**
  * a record<k, t> of argument: where `k` refer the arg and `t` refer the key type
  */
-export type Args = Map<ArgKey, ArgType>;
+export type Args = Map<ArgKey, ArgOptions>;
 
 /**
  * a record<k, v> of arg (in run context): where `k` refer the arg and `v` refer the arg value

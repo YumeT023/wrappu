@@ -25,15 +25,15 @@ export class Runner implements RunnerInterface {
     let temp = [];
 
     for (let [name, value] of Object.entries(this.args)) {
-      const type = this.cmd.args.get(name);
+      const arg = this.cmd.args.get(name);
       let normalized;
 
-      switch (type) {
+      switch (arg.type) {
         case ArgType.BOOL:
-          normalized = boolArg(name);
+          normalized = boolArg(name, arg.asAlias);
           break;
         case ArgType.STR:
-          normalized = stringArg(name, String(value));
+          normalized = stringArg(name, String(value), arg.asAlias);
           break;
       }
 

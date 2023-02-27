@@ -1,5 +1,6 @@
-import { Args, CMDInterface, SArgs } from "../@types";
+import { ArgOptions, Args, CMDInterface, SArgs } from "../@types";
 import { ArgType } from "../constant/enum";
+import { DEFAULT_ARG_OPTION } from "../constant/defaultValue";
 
 export class Cmd implements CMDInterface {
   readonly name: string;
@@ -10,18 +11,18 @@ export class Cmd implements CMDInterface {
     this.args = new Map();
   }
 
-  arg(key: string, type = ArgType.STR) {
+  arg(key: string, options: ArgOptions = {}) {
     if (this.args.has(key)) {
       throw new Error(`cannot register the same arg twice: '${key}'`);
     }
-    this.args.set(key, type);
+    this.args.set(key, { ...DEFAULT_ARG_OPTION, ...options });
 
     return this;
   }
 
   validateArgsConstraints(args: SArgs): this {
     for (let [name, value] of Object.entries(args)) {
-      let type = this.args.get(name);
+      let type = this.args.get(name).type;
 
       // no type means, it does not exist
       if (!type) {
