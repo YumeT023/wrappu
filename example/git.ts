@@ -13,3 +13,5 @@ git.cmd(init);
 console.log(init);
 
 console.log(git);
+
+git.run("init", { branch: "test", template: 'some value' });

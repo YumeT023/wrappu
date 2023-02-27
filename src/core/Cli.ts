@@ -1,5 +1,5 @@
-import { exec } from "node:child_process";
-import { ClwInterface, CMDInterface, Commands } from "../@types";
+import { ClwInterface, CMDInterface, Commands, SArgs } from "../@types";
+import { exec } from "../utils/cmd";
 
 export class Cli implements ClwInterface {
   readonly path: string;
@@ -18,17 +18,28 @@ export class Cli implements ClwInterface {
     let name = cmd.name;
 
     if (this.commands.has(name)) {
-      throw new Error(`cannot put the same cmd twice: '${name}'`);
+      throw new Error(`cannot put the same cmd twice: '${name}'.`);
     }
     this.commands.set(name, cmd);
 
     return this;
   }
 
+  run(cmdName: string, args: SArgs = {}) {
+    let cmd = this.commands.get(cmdName);
+
+    if (!cmd) {
+      throw new Error(
+        `Unknown cmd '${cmdName}'. You may have forgotten to register it.`
+      );
+    }
+
+    cmd.validateArgsConstraints(args);
+
+    return this;
+  }
+
   check(): void {
-    exec(this.path, (_: Error, stdout, stderr) => {
-      console.log(stdout);
-      if (stderr) console.log(stderr);
-    });
+    exec(this.path);
   }
 }

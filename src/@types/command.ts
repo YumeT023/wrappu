@@ -21,6 +21,11 @@ export interface ClwInterface {
    * add new `cmd` in the cli
    */
   cmd(cmd: CMDInterface): this;
+
+  /**
+   * run a `cmd` by its name and provide `args`
+   */
+  run(cmdName: string, args?: SArgs): this;
 }
 
 /**
@@ -43,6 +48,11 @@ export interface CMDInterface {
    * @return `this` to allow `cascading`
    */
   arg(key: string, type?: ArgType): this;
+
+  /**
+   * ensure that the given args exist and haven't violated their type `Constraint`
+   */
+  validateArgsConstraints(args: SArgs): this;
 }
 
 /**
@@ -51,9 +61,14 @@ export interface CMDInterface {
 export type ArgKey = string;
 
 /**
- * a record<k, t> or argument: where `k` refer the arg and `t` refer the key type
+ * a record<k, t> of argument: where `k` refer the arg and `t` refer the key type
  */
 export type Args = Map<ArgKey, ArgType>;
+
+/**
+ * a record<k, v> of arg (in run context): where `k` refer the arg and `v` refer the arg value
+ */
+export type SArgs = Record<string, string | boolean | null>;
 
 /**
  * it defines setting template
@@ -63,8 +78,8 @@ export type Args = Map<ArgKey, ArgType>;
  * `EQ`: --template=example
  */
 export enum ArgSeparator {
-  SPACE = ' ',
-  EQ = '='
+  SPACE = " ",
+  EQ = "=",
 }
 
 /**
