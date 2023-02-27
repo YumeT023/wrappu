@@ -1,5 +1,6 @@
 import { ClwInterface, CMDInterface, Commands, SArgs } from "../@types";
 import { exec } from "../utils/cmd";
+import { Runner } from "./Runner";
 
 export class Cli implements ClwInterface {
   readonly path: string;
@@ -25,7 +26,7 @@ export class Cli implements ClwInterface {
     return this;
   }
 
-  run(cmdName: string, args: SArgs = {}) {
+  createJob(cmdName: string, args: SArgs = {}) {
     let cmd = this.commands.get(cmdName);
 
     if (!cmd) {
@@ -36,7 +37,7 @@ export class Cli implements ClwInterface {
 
     cmd.validateArgsConstraints(args);
 
-    return this;
+    return new Runner(this.path, cmd, args);
   }
 
   check(): void {

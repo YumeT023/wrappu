@@ -1,17 +1,23 @@
-import { Cli, Cmd } from "../src";
-import { ArgType } from "../src/@types";
+import { Cli, Cmd } from "../dist";
+import { ArgType } from "../dist/@types";
 
+// git wrapper implementation
 const git = Cli.wrap("git");
 
-const init = new Cmd("init")
-  .arg("branch")
-  .arg("template")
-  .arg("is-okay", ArgType.BOOL);
+const logOnline = new Cmd("log").arg("oneline", ArgType.BOOL);
 
-git.cmd(init);
+const addAll = new Cmd("all");
 
-console.log(init);
+const commit = new Cmd("commit").arg("message");
 
-console.log(git);
+git.cmd(logOnline);
+git.cmd(addAll);
+git.cmd(commit);
 
-git.run("init", { branch: "test", template: 'some value' });
+git.createJob("log").run();
+git.createJob("all").run();
+git
+  .createJob("commit", {
+    message: '"feat: able to create simple wrapper and run command"',
+  })
+  .run();

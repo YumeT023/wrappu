@@ -1,6 +1,8 @@
 /**
  * Interface that specifies a `cli wrapper`
  */
+import { RunnerInterface } from "./runner";
+
 export interface ClwInterface {
   /**
    * the `cli path` in which the wrapper overlap
@@ -23,9 +25,9 @@ export interface ClwInterface {
   cmd(cmd: CMDInterface): this;
 
   /**
-   * run a `cmd` by its name and provide `args`
+   * create a job by its name and provide `args`
    */
-  run(cmdName: string, args?: SArgs): this;
+  createJob(cmdName: string, args?: SArgs): RunnerInterface;
 }
 
 /**
