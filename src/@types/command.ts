@@ -26,9 +26,9 @@ export interface ClwInterface {
   cmd(cmd: CMDInterface): this;
 
   /**
-   * create a job by its name and provide `args`
+   * setup new job by `cmd` name and provide `args` for it
    */
-  createJob(cmdName: string, args?: SArgs): RunnerInterface;
+  setup(cmdName: string, args?: SArgs): RunnerInterface;
 }
 
 /**

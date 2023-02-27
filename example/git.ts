@@ -1,17 +1,18 @@
 import { Cli, Cmd } from "../dist";
 import { ArgType } from "../dist/constant/enum";
 
-// git wrapper implementation
+// git wrapper simple implementation
 const git = Cli.wrap("git");
 
-const logOnline = new Cmd("log").arg("oneline", ArgType.BOOL);
+const log = new Cmd("log").arg("oneline", ArgType.BOOL);
 
-const addAll = new Cmd("all");
+const status = new Cmd("status");
 
-const commit = new Cmd("commit").arg("message").arg("amend", ArgType.BOOL);
+const init = new Cmd("init").arg("branch");
 
-git.cmd(logOnline);
-git.cmd(addAll);
-git.cmd(commit);
+git.cmd(log);
+git.cmd(status);
+git.cmd(init);
 
-git.createJob("commit", { amend: true }).run();
+git.setup("log", { oneline: true }).run();
+git.setup("status").run();

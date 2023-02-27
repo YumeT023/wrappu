@@ -26,7 +26,7 @@ export class Cli implements ClwInterface {
     return this;
   }
 
-  createJob(cmdName: string, args: SArgs = {}) {
+  setup(cmdName: string, args: SArgs = {}) {
     let cmd = this.commands.get(cmdName);
 
     if (!cmd) {
