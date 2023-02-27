@@ -1,1 +1,1 @@
-console.log("Hello wrappu.js");
+export * from './core';
