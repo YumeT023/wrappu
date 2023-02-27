@@ -1,6 +1,7 @@
-import { ArgType, SArgs, CommittedCmd, RunnerInterface } from "../@types";
+import { CommittedCmd, RunnerInterface, SArgs } from "../@types";
 import { boolArg, stringArg } from "../utils/arg";
 import { exec } from "../utils/cmd";
+import { ArgType } from "../constant/enum";
 
 export class Runner implements RunnerInterface {
   readonly args: SArgs;

@@ -1,4 +1,5 @@
-import { Args, ArgType, CMDInterface, SArgs } from "../@types";
+import { Args, CMDInterface, SArgs } from "../@types";
+import { ArgType } from "../constant/enum";
 
 export class Cmd implements CMDInterface {
   readonly name: string;
@@ -31,7 +32,9 @@ export class Cmd implements CMDInterface {
 
       if (type === ArgType.BOOL) {
         if (!/^(true|false)$/.test(String(value)) && value !== null) {
-          throw new Error(`value: '${value}' violate the constraint: ${name}#${type}`);
+          throw new Error(
+            `value: '${value}' violate the constraint: ${name}#${type}`
+          );
         }
       }
 

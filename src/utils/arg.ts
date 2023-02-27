@@ -1,4 +1,4 @@
-import { ArgSeparator } from "../@types";
+import { ArgSeparator } from "../constant/enum";
 
 export const normalize = (arg: string) => {
   return "--".concat(arg);
