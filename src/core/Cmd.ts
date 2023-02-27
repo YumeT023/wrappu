@@ -1,4 +1,4 @@
-import { ArgKey, Args, ArgType, CMDInterface } from "../@types";
+import { Args, ArgType, CMDInterface } from "../@types";
 
 export class Cmd implements CMDInterface {
   readonly name: string;
@@ -6,10 +6,10 @@ export class Cmd implements CMDInterface {
 
   constructor(name: string) {
     this.name = name;
-    this.args = new Map<ArgKey, ArgType>([]);
+    this.args = new Map();
   }
 
-  arg(key: string, type= ArgType.STR) {
+  arg(key: string, type = ArgType.STR) {
     if (this.args.has(key)) {
       throw new Error(`cannot register the same arg twice: '${key}'`);
     }

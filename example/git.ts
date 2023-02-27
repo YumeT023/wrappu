@@ -6,7 +6,9 @@ const git = Cli.wrap("git");
 const init = new Cmd("init")
   .arg("branch")
   .arg("template")
-  .arg("is-okay", ArgType.BOOL)
+  .arg("is-okay", ArgType.BOOL);
+
+git.cmd(init);
 
 console.log(init);
 

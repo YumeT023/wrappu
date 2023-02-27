@@ -8,10 +8,25 @@ export interface ClwInterface {
   readonly path: string;
 
   /**
+   * list of `cmd` for the cli wrapper
+   */
+  commands: Commands;
+
+  /**
    * check if the specified `path` is a valid one
    */
   check(): void;
+
+  /**
+   * add new `cmd` in the cli
+   */
+  cmd(cmd: CMDInterface): this;
 }
+
+/**
+ * a record<a, c> or argument: where `a` refer the arg and `c` refer the Cmd
+ */
+export type Commands = Map<string, CMDInterface>;
 
 /**
  * Interface that specifies a `cmd` in a `cli`
@@ -36,7 +51,7 @@ export interface CMDInterface {
 export type ArgKey = string;
 
 /**
- * a record<k, t> or argument: where `k` refer the keyname and `t` refer the key type
+ * a record<k, t> or argument: where `k` refer the arg and `t` refer the key type
  */
 export type Args = Map<ArgKey, ArgType>;
 
