@@ -1,10 +1,15 @@
 {
   "name": "@yumii.saiko/wrappu",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "yumii.saiko <yumii.saiko@gmail.com>",
   "homepage": "https://github.com/YumeT023/wrappu#readme",
   "license": "MIT",
-  "keywords": ["cli", "cli-wrapper", "command line", "typescript"],
+  "keywords": [
+    "cli",
+    "cli-wrapper",
+    "command line",
+    "typescript"
+  ],
   "bugs": {
     "url": "https://github.com/YumeT023/wrappu/issues",
     "email": "yumii.saiko@gmail.com"
