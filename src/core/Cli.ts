@@ -1,5 +1,5 @@
-import { CliWrapper, CMD, Commands, SArgs } from "../@types";
-import { exec } from "../utils/cmd";
+import { CliWrapper, CMD, Commands, SArgs } from "../@types/cli";
+import { exec } from "./utils/cmd";
 import { Runner } from "./Runner";
 
 export class Cli implements CliWrapper {

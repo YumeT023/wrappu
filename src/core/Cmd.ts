@@ -1,4 +1,4 @@
-import { ArgOptions, Args, CMD, SArgs } from "../@types";
+import { ArgOptions, Args, CMD, SArgs } from "../@types/cli";
 import { ArgType } from "../constant/enum";
 import { DEFAULT_ARG_OPTION } from "../constant/defaultValue";
 

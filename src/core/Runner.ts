@@ -1,6 +1,6 @@
-import { ImmutableCMD, Runnable, SArgs } from "../@types";
-import { boolArg, stringArg } from "../utils/arg";
-import { exec } from "../utils/cmd";
+import { ImmutableCMD, Runnable, SArgs } from "../@types/cli";
+import { boolArg, stringArg } from "./utils/arg";
+import { exec } from "./utils/cmd";
 import { ArgType } from "../constant/enum";
 
 export class Runner implements Runnable {

@@ -1,4 +1,4 @@
-import { ArgOptions } from "../@types";
+import { ArgOptions } from "../@types/cli";
 import { ArgType } from "./enum";
 
 export const DEFAULT_ARG_OPTION: ArgOptions = {
