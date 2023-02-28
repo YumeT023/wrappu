@@ -1,15 +1,15 @@
-import { CommittedCmd, RunnerInterface, SArgs } from "../@types";
+import { ImmutableCMD, Runnable, SArgs } from "../@types";
 import { boolArg, stringArg } from "../utils/arg";
 import { exec } from "../utils/cmd";
 import { ArgType } from "../constant/enum";
 
-export class Runner implements RunnerInterface {
+export class Runner implements Runnable {
   readonly args: SArgs;
-  readonly cmd: CommittedCmd;
+  readonly cmd: ImmutableCMD;
   readonly path: string;
   private _readyCmdLine: string[];
 
-  constructor(path: string, cmd: CommittedCmd, args: SArgs) {
+  constructor(path: string, cmd: ImmutableCMD, args: SArgs) {
     this.cmd = cmd;
     this.args = args;
     this.path = path;

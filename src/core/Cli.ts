@@ -1,8 +1,8 @@
-import { ClwInterface, CMDInterface, Commands, SArgs } from "../@types";
+import { CliWrapper, CMD, Commands, SArgs } from "../@types";
 import { exec } from "../utils/cmd";
 import { Runner } from "./Runner";
 
-export class Cli implements ClwInterface {
+export class Cli implements CliWrapper {
   readonly path: string;
   commands: Commands;
 
@@ -15,7 +15,7 @@ export class Cli implements ClwInterface {
     return new Cli(path);
   }
 
-  cmd(cmd: CMDInterface) {
+  cmd(cmd: CMD) {
     let name = cmd.name;
 
     if (this.commands.has(name)) {

@@ -25,5 +25,3 @@ git.cmd(init);
 git.cmd(commit);
 git.cmd(checkout);
 git.cmd(branch);
-
-git.setup(branch.name, { D: 'master' }).run()
