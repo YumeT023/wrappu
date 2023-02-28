@@ -1,8 +1,17 @@
 {
-  "name": "wrappu",
-  "version": "1.0.0",
-  "author": "Yume Saiko",
-  "license": "ISC",
+  "name": "@yumii.saiko/wrappu",
+  "version": "1.0.2",
+  "author": "yumii.saiko <yumii.saiko@gmail.com>",
+  "homepage": "https://github.com/YumeT023/wrappu#readme",
+  "license": "MIT",
+  "keywords": ["cli", "cli-wrapper", "command line", "typescript"],
+  "bugs": {
+    "url": "https://github.com/YumeT023/wrappu/issues",
+    "email": "yumii.saiko@gmail.com"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "a framework that helps you to create a cli wrapper for node.js with ease",
   "scripts": {
     "build": "tsc",
