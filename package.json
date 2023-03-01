@@ -4,6 +4,8 @@
   "author": "yumii.saiko <yumii.saiko@gmail.com>",
   "homepage": "https://github.com/YumeT023/wrappu#readme",
   "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "keywords": [
     "cli",
     "cli-wrapper",
