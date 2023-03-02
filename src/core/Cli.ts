@@ -1,6 +1,8 @@
 import { CliWrapper, CMD, Commands, SArgs } from "../@types/cli";
 import { exec } from "./utils/cmd";
 import { Runner } from "./Runner";
+import { UnknownCmdException } from "../errors";
+import { DuplicateCmdException } from "../errors/DuplicateCmdException";
 
 export class Cli implements CliWrapper {
   readonly path: string;
@@ -19,10 +21,10 @@ export class Cli implements CliWrapper {
     let name = cmd.name;
 
     if (this.commands.has(name)) {
-      throw new Error(`cannot put the same cmd twice: '${name}'.`);
+      throw DuplicateCmdException(name);
     }
-    this.commands.set(name, cmd);
 
+    this.commands.set(name, cmd);
     return this;
   }
 
@@ -30,9 +32,7 @@ export class Cli implements CliWrapper {
     let cmd = this.commands.get(cmdName);
 
     if (!cmd) {
-      throw new Error(
-        `Unknown cmd '${cmdName}'. You may have forgotten to register it.`
-      );
+      throw UnknownCmdException(cmdName);
     }
 
     cmd.validateArgsConstraints(args);

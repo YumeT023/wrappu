@@ -1,7 +1,7 @@
 /**
  * Interface that specifies a `cli wrapper`
  */
-import { ArgType } from "../constant/enum";
+import { ArgType } from "../constant/arg";
 
 export interface CliWrapper {
   /**

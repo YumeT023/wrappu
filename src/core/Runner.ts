@@ -1,7 +1,7 @@
 import { ImmutableCMD, Runnable, SArgs } from "../@types/cli";
 import { boolArg, stringArg } from "./utils/arg";
 import { exec } from "./utils/cmd";
-import { ArgType } from "../constant/enum";
+import { ArgType } from "../constant/arg";
 
 export class Runner implements Runnable {
   readonly args: SArgs;

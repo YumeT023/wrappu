@@ -1,4 +1,4 @@
-import { ArgSeparator } from "../constant/enum";
+import { ArgSeparator } from "../../constant/arg";
 
 export const normalize = (arg: string, asAlias = false) => {
   let pre = "-";

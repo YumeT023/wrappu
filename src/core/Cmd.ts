@@ -1,6 +1,8 @@
 import { ArgOptions, Args, CMD, SArgs } from "../@types/cli";
-import { ArgType } from "../constant/enum";
 import { DEFAULT_ARG_OPTION } from "../constant/defaultValue";
+import { UnknownArgException } from "../errors";
+import { DuplicateArgException } from "../errors/DuplicateArgException";
+import { validateArg } from "./validation/validate-arg";
 
 export class Cmd implements CMD {
   readonly name: string;
@@ -13,7 +15,7 @@ export class Cmd implements CMD {
 
   arg(key: string, options: ArgOptions = {}) {
     if (this.args.has(key)) {
-      throw new Error(`cannot register the same arg twice: '${key}'`);
+      throw DuplicateArgException(key, this.name);
     }
     this.args.set(key, { ...DEFAULT_ARG_OPTION, ...options });
 
@@ -26,22 +28,10 @@ export class Cmd implements CMD {
 
       // no option means, it does not exist
       if (!option) {
-        throw new Error(
-          `cmd '${this.name}' doesn't contain arg '${name}'. You may have forgotten to register it`
-        );
+        throw UnknownArgException(name, this.name);
       }
 
-      if (option.type === ArgType.BOOL) {
-        if (!/^(true|false)$/.test(String(value)) && value !== null) {
-          throw new Error(
-            `value: '${value}' violate the constraint: ${name}#${option.type}`
-          );
-        }
-      }
-
-      if (option.type === ArgType.STR && !value) {
-        throw new Error(`missing value for the arg: ${name}#${option.type}`);
-      }
+      validateArg(name, value, this.name, option);
     }
 
     return this;

@@ -7,7 +7,4 @@ export interface Exception {
   code: Code;
   message: string;
   name: string;
-  stack: string;
 }
-
-export type FormatException = Omit<Exception, 'stack'>
