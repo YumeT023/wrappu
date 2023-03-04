@@ -4,6 +4,7 @@ import { UnknownArgException } from "../errors";
 import { DuplicateArgException } from "../errors/DuplicateArgException";
 import { validateArg } from "./validation/validate-arg";
 
+// TODO: feat(allow this kind of cmd `npm run build`)
 export class Cmd implements CMD {
   readonly name: string;
   args: Args;

@@ -4,6 +4,7 @@ import { Runner } from "./Runner";
 import { UnknownCmdException } from "../errors";
 import { DuplicateCmdException } from "../errors/DuplicateCmdException";
 
+// TODO: disallow to instantiate directly the Cli, both in js and ts
 export class Cli implements CliWrapper {
   readonly path: string;
   commands: Commands;
