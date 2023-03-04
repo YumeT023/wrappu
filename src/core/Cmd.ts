@@ -9,9 +9,13 @@ export class Cmd implements CMD {
   readonly name: string;
   args: Args;
 
-  constructor(name: string) {
+  private constructor(name: string) {
     this.name = name;
     this.args = new Map();
+  }
+
+  public static create(name: string) {
+    return new this(name);
   }
 
   arg(key: string, options: ArgOptions = {}) {

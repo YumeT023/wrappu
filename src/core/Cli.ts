@@ -14,8 +14,8 @@ export class Cli implements CliWrapper {
     this.commands = new Map();
   }
 
-  static wrap(path: string) {
-    return new Cli(path);
+  public static wrap(path: string) {
+    return new this(path);
   }
 
   cmd(cmd: CMD) {
