@@ -7,20 +7,20 @@ export class Runner implements Runnable {
   readonly args: SArgs;
   readonly cmd: ImmutableCMD;
   readonly path: string;
-  private _readyCmdLine: string[];
+  private _commandLine: string[];
 
   constructor(path: string, cmd: ImmutableCMD, args: SArgs) {
     this.cmd = cmd;
     this.args = args;
     this.path = path;
 
-    this._readyCmdLine = [path];
+    this._commandLine = [path];
 
     this._normalize();
   }
 
   private _normalize() {
-    this._readyCmdLine.push(this.cmd.name);
+    this._commandLine.push(this.cmd.name);
 
     let temp = [];
 
@@ -40,11 +40,11 @@ export class Runner implements Runnable {
       temp.push(normalized);
     }
 
-    this._readyCmdLine.push(...temp);
+    this._commandLine.push(...temp);
   }
 
   // TODO: think about another approach because each cmds have different exec duration
   run(): void {
-    exec(this._readyCmdLine.join(" "));
+    exec(this._commandLine.join(" "));
   }
 }

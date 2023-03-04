@@ -1,20 +1,18 @@
+const PLACEHOLDER = "{}";
+
 export const interpolate = (
   template: string,
   ...values: Array<boolean | string | number>
 ) => {
-  const pattern = /{}/;
-
-  const matches = template.match(new RegExp(pattern, "g")) || [];
+  const matches = template.match(new RegExp(PLACEHOLDER, "g")) || [];
 
   if (matches.length > values.length || values.length > matches.length) {
-    throw new Error(
-      "args may be insufficient or greater than interpolation symbol"
-    );
+    throw new Error("args may be insufficient or greater than placeholder");
   }
 
-  for (const value of values) {
-    template = template.replace(pattern, String(value));
-  }
+  values.forEach((value) => {
+    template = template.replace(PLACEHOLDER, String(value));
+  });
 
   return template;
 };
