@@ -11,7 +11,7 @@ function checkBoolArg(value: any) {
 }
 
 export const validateArg: ValidateArg = (name, value, cmd, constraint) => {
-  if ((constraint.type === ArgType.STR && !value) || checkBoolArg(value)) {
+  if ((constraint.type === ArgType.STR && !value) && checkBoolArg(value)) {
     throw ArgConstraintViolationException(name, value, constraint.type, cmd);
   }
 };
