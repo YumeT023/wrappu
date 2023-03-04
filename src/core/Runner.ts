@@ -43,7 +43,6 @@ export class Runner implements Runnable {
     this._commandLine.push(...temp);
   }
 
-  // TODO: think about another approach because each cmds have different exec duration
   run(): void {
     exec(this._commandLine.join(" "));
   }
