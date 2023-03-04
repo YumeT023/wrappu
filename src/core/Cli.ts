@@ -1,4 +1,5 @@
-import { CliWrapper, CMD, Commands, SArgs } from "../@types/cli";
+import { CliWrapper, CMD } from "../@types/core";
+import { Commands, SArgs } from "../@types/utils";
 import { exec } from "./utils/cmd";
 import { Runner } from "./Runner";
 import { UnknownCmdException } from "../errors";

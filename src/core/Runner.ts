@@ -1,4 +1,5 @@
-import { ImmutableCMD, Runnable, SArgs } from "../@types/cli";
+import { ImmutableCMD, SArgs } from "../@types/utils";
+import { Runnable } from "../@types/core";
 import { boolArg, stringArg } from "./utils/arg";
 import { exec } from "./utils/cmd";
 import { ArgType } from "../constant/arg";
