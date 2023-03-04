@@ -1,6 +1,6 @@
-import { ArgOptions } from "../../@types/cli";
 import { ArgType } from "../../constant/arg";
 import { ArgConstraintViolationException } from "../../errors/ArgConstraintViolationException";
+import { ArgOptions } from "../../@types/utils";
 
 type ValidateArg = {
   (name: string, value: any, cmd: string, constraint: ArgOptions): void;

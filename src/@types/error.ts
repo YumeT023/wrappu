@@ -1,10 +1,10 @@
-import { Code } from "../constant/error";
+import { Code as ErrorCode } from "../constant/error";
 
 /**
  * Interface that specifies an exception
  */
 export interface Exception {
-  code: Code;
+  code: ErrorCode;
   message: string;
   name: string;
 }

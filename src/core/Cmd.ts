@@ -1,4 +1,5 @@
-import { ArgOptions, Args, CMD, SArgs } from "../@types/cli";
+import { CMD } from "../@types/core";
+import { ArgOptions, Args, SArgs } from "../@types/utils";
 import { DEFAULT_ARG_OPTION } from "../constant/defaultValue";
 import { UnknownArgException } from "../errors";
 import { DuplicateArgException } from "../errors/DuplicateArgException";
