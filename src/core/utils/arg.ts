@@ -1,24 +1,39 @@
-import { ArgSeparator } from "../../constant/arg";
+import { ArgSeparator, ArgType } from "../../constant/arg";
+import { ArgMetadata, ArgOptions } from "../../@types/utils";
+import { placeholderOf } from "../../utils/interpolate";
+import { isTrue } from "../validation/utils";
 
-export const normalize = (arg: string, asAlias = false) => {
+const prefix = (option: ArgOptions) => {
   let pre = "-";
-
-  if (!asAlias) {
-    pre += "-";
-  }
-
-  return pre.concat(arg);
+  return !option.asAlias ? pre.concat("-") : pre;
 };
 
-export const stringArg = (
-  name: string,
-  val: string,
-  asAlias: boolean,
+export const renderArgValue = (
+  metadata: ArgMetadata,
   sep = ArgSeparator.SPACE
 ) => {
-  return "".concat(normalize(name, asAlias), sep, val);
+  const { value, name, option } = metadata;
+  const pre = prefix(option);
+
+  switch (option.type) {
+    case ArgType.BOOL:
+      return isTrue(value) ? pre.concat(name) : "";
+    case ArgType.STR:
+      return pre.concat(name, sep, value as string);
+  }
 };
 
-export const boolArg = (name: string, asAlias: boolean) => {
-  return normalize(name, asAlias) + " ";
+export const renderArgTemplate = (
+  name: string,
+  option: ArgOptions,
+  sep = ArgSeparator.SPACE
+) => {
+  const pre = prefix(option);
+
+  switch (option.type) {
+    case ArgType.BOOL:
+      return placeholderOf(name);
+    case ArgType.STR:
+      return pre.concat(name, sep, placeholderOf(name));
+  }
 };

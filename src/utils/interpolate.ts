@@ -16,3 +16,5 @@ export const interpolate = (
 
   return template;
 };
+
+export const placeholderOf = (s: string) => "{" + s + "}";

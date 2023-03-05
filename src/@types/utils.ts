@@ -20,6 +20,15 @@ export interface ArgOptions {
 }
 
 /**
+ * arg that specifies an `arg metadata` which are: options, name, value
+ */
+export interface ArgMetadata {
+  name: string;
+  value: string | boolean | null;
+  option: ArgOptions;
+}
+
+/**
  * a Record for args
  *
  * it is mainly used to specify `args`
