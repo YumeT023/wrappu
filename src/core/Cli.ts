@@ -1,9 +1,10 @@
 import { CliWrapper, CMD } from "../@types/core";
 import { Commands, SArgs } from "../@types/utils";
-import { exec } from "./utils/cmd";
+import { exec } from "../utils/cmd";
 import { Runner } from "./Runner";
 import { UnknownCmdException } from "../errors";
 import { DuplicateCmdException } from "../errors/DuplicateCmdException";
+import { resolveCli } from "../utils/cli";
 
 // TODO: disallow to instantiate directly the Cli, both in js and ts
 export class Cli implements CliWrapper {
@@ -16,7 +17,7 @@ export class Cli implements CliWrapper {
   }
 
   public static wrap(path: string) {
-    return new this(path);
+    return new this(resolveCli(path));
   }
 
   cmd(cmd: CMD) {

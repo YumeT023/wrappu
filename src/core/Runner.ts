@@ -2,7 +2,7 @@ import { ImmutableCMD, SArgs } from "../@types/utils";
 import { Runnable } from "../@types/core";
 import { boolArg, stringArg } from "./utils/arg";
 import { ArgType } from "../constant/arg";
-import { exec } from "./utils/cmd";
+import { exec } from "../utils/cmd";
 
 export class Runner implements Runnable {
   readonly args: SArgs;
@@ -45,6 +45,6 @@ export class Runner implements Runnable {
   }
 
   run(): void {
-    exec(this.memberVarCommandLine.join('  '));
+    exec(this.memberVarCommandLine.join('  '), console.log);
   }
 }
