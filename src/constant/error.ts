@@ -5,25 +5,36 @@ export enum Code {
   /**
    * unknown `arg`
    */
-  C200 = "C200",
+  UNKNOWN_ARG = "C200",
 
   /**
    * unknown `cmd`
    */
-  C201 = "C201",
+  UNKNOWN_CMD = "C201",
 
   /**
    * duplicate `arg`
    */
-  C300 = "C300",
+  DUPLICATED_ARG = "C300",
 
   /**
    * duplicate `cmd`
    */
-  C301 = "C301",
+  DUPLICATED_CMD = "C301",
 
   /**
    * arg constraint `violation`
    */
-  C400 = "C400"
+  ARG_CONSTRAINT_VIOLATION = "C400",
+
+
+  /**
+   * missing arg value `violation`
+   */
+  MISSING_ARG = "C402",
+
+  /**
+   * unexpected `arg`
+   */
+  UNEXPECTED_ARG = "C600",
 }

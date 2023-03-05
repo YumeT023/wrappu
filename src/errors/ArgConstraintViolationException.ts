@@ -11,7 +11,7 @@ class ArgConstraintViolation implements Exception {
   name: string;
 
   constructor(...context: any[]) {
-    this.code = Code.C400;
+    this.code = Code.ARG_CONSTRAINT_VIOLATION;
     this.message = interpolate(ArgConstraintViolation.TEMPLATE, ...context);
     this.name = ArgConstraintViolationException.name;
   }

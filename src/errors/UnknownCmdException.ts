@@ -10,7 +10,7 @@ class UnknownCmd implements Exception {
   name: string;
 
   constructor(cmd: string) {
-    this.code = Code.C201;
+    this.code = Code.UNKNOWN_CMD;
     this.message = interpolate(UnknownCmd.TEMPLATE, cmd);
     this.name = UnknownCmdException.name;
   }

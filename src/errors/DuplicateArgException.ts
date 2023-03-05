@@ -10,7 +10,7 @@ class DuplicateArg implements Exception {
   name: string;
 
   constructor(arg: string, cmd: string) {
-    this.code = Code.C300;
+    this.code = Code.DUPLICATED_ARG;
     this.message = interpolate(DuplicateArg.TEMPLATE, arg, cmd);
     this.name = DuplicateArgException.name;
   }
