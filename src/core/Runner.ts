@@ -1,27 +1,27 @@
 import { ImmutableCMD, SArgs } from "../@types/utils";
 import { Runnable } from "../@types/core";
 import { boolArg, stringArg } from "./utils/arg";
-import { exec } from "./utils/cmd";
 import { ArgType } from "../constant/arg";
+import { exec } from "./utils/cmd";
 
 export class Runner implements Runnable {
   readonly args: SArgs;
   readonly cmd: ImmutableCMD;
   readonly path: string;
-  private _commandLine: string[];
+  private memberVarCommandLine: string[];
 
   constructor(path: string, cmd: ImmutableCMD, args: SArgs) {
     this.cmd = cmd;
     this.args = args;
     this.path = path;
 
-    this._commandLine = [path];
+    this.memberVarCommandLine = [path];
 
-    this._normalize();
+    this.setupCMD();
   }
 
-  private _normalize() {
-    this._commandLine.push(this.cmd.name);
+  private setupCMD() {
+    this.memberVarCommandLine.push(this.cmd.name);
 
     let temp = [];
 
@@ -41,10 +41,10 @@ export class Runner implements Runnable {
       temp.push(normalized);
     }
 
-    this._commandLine.push(...temp);
+    this.memberVarCommandLine.push(...temp);
   }
 
   run(): void {
-    exec(this._commandLine.join(" "));
+    exec(this.memberVarCommandLine.join('  '));
   }
 }
