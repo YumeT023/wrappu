@@ -1,6 +1,5 @@
 import { CliWrapper, CMD } from "../@types/core";
 import { Commands, SArgs } from "../@types/utils";
-import { exec } from "../utils/cmd";
 import { Runner } from "./Runner";
 import { UnknownCmdException } from "../errors";
 import { DuplicateCmdException } from "../errors/DuplicateCmdException";
@@ -41,9 +40,5 @@ export class Cli implements CliWrapper {
     cmd.validateArgsConstraints(args);
 
     return new Runner(this.path, cmd, args);
-  }
-
-  check(): void {
-    exec(this.path);
   }
 }

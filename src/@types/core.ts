@@ -15,11 +15,6 @@ export interface CliWrapper {
   commands: Commands;
 
   /**
-   * check if the specified `path` is a valid one
-   */
-  check(): void;
-
-  /**
    * register new `cmd` in the cli
    *
    * @throws Error: when you attempt to register the same `cmd` twice

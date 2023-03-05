@@ -31,20 +31,22 @@ export class Runner implements Runnable {
 
       switch (arg.type) {
         case ArgType.BOOL:
-          normalized = boolArg(name, arg.asAlias);
+          if (value) {
+            normalized = boolArg(name, arg.asAlias);
+          }
           break;
         case ArgType.STR:
           normalized = stringArg(name, String(value), arg.asAlias);
           break;
       }
 
-      temp.push(normalized);
+      normalized && temp.push(normalized);
     }
 
     this.memberVarCommandLine.push(...temp);
   }
 
   run(): void {
-    exec(this.memberVarCommandLine.join('  '), console.log);
+    exec(this.memberVarCommandLine.join("  "), console.log);
   }
 }
