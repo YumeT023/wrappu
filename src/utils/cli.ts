@@ -7,7 +7,7 @@ import { EOL } from "os";
 export const resolveCli = (path: string) => {
   // return directly if the given path is already a valid one
   if (isCLI(path)) {
-    return path;
+    return render(path);
   }
   return findCli(path);
 };
@@ -23,12 +23,14 @@ const findCli = (path: string) => {
 
   for (let localVarPath of paths) {
     if (isCLI(localVarPath)) {
-      return [`"`, localVarPath, `"`].join("");
+      return render(localVarPath);
     }
   }
 
   throw new Error("Unable to find the cli path");
 };
+
+const render = (path: string) => [`"`, path, `"`].join("");
 
 const isCLI = (path: string) => {
   return /.*?(cmd|exe)/.test(path);
