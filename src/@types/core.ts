@@ -25,7 +25,17 @@ export interface CliWrapper {
   /**
    * setup new job by `cmd` name and provide `args` for it
    */
-  setup(cmdName: string, args?: SArgs): Runnable;
+  setup(cmd: string, args?: SArgs): Runnable;
+
+  /**
+   * like `prepared statement`, prepare(...) function allows you to write a `PreparedRunnable`
+   * and re-run it anytime with different value
+   *
+   * placeholders here is a list of args [that this cmd should own]
+   *
+   * @throws {UnknownArgException} if any placeholders do not exist in this cmd 's `arg` record
+   */
+  prepare(cmd: string, ...placeholders: string[]): PreparedRunnable;
 }
 
 /**
@@ -40,15 +50,24 @@ export interface CMD {
    *
    * options is by default: type: 'string', asAlias: false
    *
-   * @throws Error: when you attempt to register the same `arg name` twice
+   * @throws {DuplicateArgException}: when you attempt to register the same `arg name` twice
    * @return `this` to allow `cascading`
    */
   arg(key: string, options?: ArgOptions): this;
 
   /**
    * ensure that the given args exist and haven't violated their type `Constraint`
+   *
+   * @throws {ArgConstraintViolationException} if any arg violate their spec
    */
   validateArgsConstraints(args: SArgs): void;
+
+  /**
+   * check that all the given `args` exist in this `cmd`
+   *
+   * @throws {UnknownArgException} if any args do not exist in this `cmd`
+   */
+  checkContainArgs(args: string[]): void;
 }
 
 /**
@@ -60,10 +79,30 @@ export interface CMD {
 export interface Runnable {
   readonly path: string;
   readonly cmd: ImmutableCMD;
-  readonly args: SArgs;
+
+  /**
+   * display the built `raw` cmd
+   */
+  raw(): string;
 
   /**
    * run `normalized` cmd line
    */
   run(): void;
+}
+
+/**
+ * Interface that specifies a cmd `prepared` runnable, which works just like `prepared statement` in
+ * `sql` drivers such as: PDO,
+ */
+export interface PreparedRunnable extends Omit<Runnable, 'run'> {
+  /**
+   * unlike the raw() of Runnable, `raw(...)` function show the `cmd` with the specified
+   * placeholders
+   */
+  raw(): string;
+  /**
+   * run `prepared` cmd with the passed args
+   */
+  run(args: SArgs): void;
 }

@@ -1,6 +1,6 @@
 import { Exception } from "../@types/error";
 import { Code } from "../constant/error";
-import { interpolate } from "../utils/interpolate";
+import { interpolate } from "../utils/placeholder";
 import { normalize } from "./utils/normalize";
 
 class UnknownCmd implements Exception {

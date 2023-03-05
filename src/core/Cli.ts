@@ -1,8 +1,7 @@
-import { CliWrapper, CMD } from "../@types/core";
+import { CliWrapper, CMD, PreparedRunnable } from "../@types/core";
 import { Commands, SArgs } from "../@types/utils";
-import { Runner } from "./Runner";
-import { UnknownCmdException } from "../errors";
-import { DuplicateCmdException } from "../errors/DuplicateCmdException";
+import { PreparedRunner, Runner } from "./runner";
+import { DuplicatedCmdException, UnknownCmdException } from "../errors";
 import { resolveCli } from "../utils/cli";
 
 // TODO: disallow to instantiate directly the Cli, both in js and ts
@@ -23,22 +22,34 @@ export class Cli implements CliWrapper {
     let name = cmd.name;
 
     if (this.commands.has(name)) {
-      throw DuplicateCmdException(name);
+      throw DuplicatedCmdException(name);
     }
 
     this.commands.set(name, cmd);
     return this;
   }
 
-  setup(cmdName: string, args: SArgs = {}) {
-    let cmd = this.commands.get(cmdName);
+  setup(cmd: string, args: SArgs = {}) {
+    let command = this.commands.get(cmd);
 
-    if (!cmd) {
-      throw UnknownCmdException(cmdName);
+    if (!command) {
+      throw UnknownCmdException(cmd);
     }
 
-    cmd.validateArgsConstraints(args);
+    command.validateArgsConstraints(args);
 
-    return new Runner(this.path, cmd, args);
+    return new Runner(this.path, command, args);
+  }
+
+  prepare(cmd: string, ...placeholders: string[]): PreparedRunnable {
+    let command = this.commands.get(cmd);
+
+    if (!command) {
+      throw UnknownCmdException(cmd);
+    }
+
+    command.checkContainArgs(placeholders);
+
+    return new PreparedRunner(this.path, command, placeholders);
   }
 }

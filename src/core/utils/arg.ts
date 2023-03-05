@@ -1,6 +1,6 @@
 import { ArgSeparator, ArgType } from "../../constant/arg";
 import { ArgMetadata, ArgOptions } from "../../@types/utils";
-import { placeholderOf } from "../../utils/interpolate";
+import { placeholderOf } from "../../utils/placeholder";
 import { isTrue } from "../validation/utils";
 
 const prefix = (option: ArgOptions) => {

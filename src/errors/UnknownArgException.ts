@@ -1,4 +1,4 @@
-import { interpolate } from "../utils/interpolate";
+import { interpolate } from "../utils/placeholder";
 import { Exception } from "../@types/error";
 import { normalize } from "./utils/normalize";
 import { Code } from "../constant/error";

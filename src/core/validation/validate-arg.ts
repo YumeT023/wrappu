@@ -1,5 +1,5 @@
-import { ArgConstraintViolationException } from "../../errors/ArgConstraintViolationException";
 import { ArgOptions } from "../../@types/utils";
+import { ArgConstraintViolationException } from "../../errors";
 import { ArgType } from "../../constant/arg";
 import { isBool } from "./utils";
 
@@ -8,17 +8,14 @@ type ValidateArg = {
 };
 
 export const validateArg: ValidateArg = (name, value, cmd, { type }) => {
-  const subject = String(value);
-
-  if (!subject) {
+  if (!value) {
     throw ArgConstraintViolationException(name, value, type, cmd);
   }
 
-  if (type === ArgType.STR && isBool(value)) {
-    throw ArgConstraintViolationException(name, value, type, cmd);
-  }
-
-  if (type === ArgType.BOOL && !isBool(value)) {
+  if (
+    (type === ArgType.STR && isBool(value)) ||
+    (type === ArgType.BOOL && !isBool(value))
+  ) {
     throw ArgConstraintViolationException(name, value, type, cmd);
   }
 };

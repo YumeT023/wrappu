@@ -1,7 +1,7 @@
 import { Exception } from "../@types/error";
 import { Code } from "../constant/error";
 import { normalize } from "./utils/normalize";
-import { interpolate } from "../utils/interpolate";
+import { interpolate } from "../utils/placeholder";
 import { ArgType } from "../constant/arg";
 
 class ArgConstraintViolation implements Exception {

@@ -1,8 +1,7 @@
 import { CMD } from "../@types/core";
 import { ArgOptions, Args, SArgs } from "../@types/utils";
 import { DEFAULT_ARG_OPTION } from "../constant/defaultValue";
-import { UnknownArgException } from "../errors";
-import { DuplicateArgException } from "../errors/DuplicateArgException";
+import { DuplicateArgException, UnknownArgException } from "../errors";
 import { validateArg } from "./validation/validate-arg";
 
 // TODO: feat(allow this kind of cmd `npm run build`)
@@ -41,5 +40,16 @@ export class Cmd implements CMD {
     }
 
     return this;
+  }
+
+  checkContainArgs(args: string[]): void {
+    const cmdKeys = Array.from(this.args.keys());
+    const regexp = new RegExp("^(".concat(cmdKeys.join("|")).concat(")$"));
+
+    args.forEach((arg) => {
+      if (!regexp.test(arg)) {
+        throw UnknownArgException(arg, this.name);
+      }
+    });
   }
 }
