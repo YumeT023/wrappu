@@ -1,6 +1,6 @@
 import { CMD, PreparedRunnable } from "../../@types/core";
 import { ImmutableCMD, SArgs } from "../../@types/utils";
-import { renderArgTemplate } from "../utils/arg";
+import { renderArgTemplate, renderOnItsPlaceholder } from "../utils/arg";
 import { placeholderOf, removePlaceholder } from "../../utils/placeholder";
 import { exec } from "../../utils/cmd";
 import { MissingArgException, UnexpectedArgException } from "../../errors";
@@ -31,9 +31,15 @@ export class PreparedRunner implements PreparedRunnable {
 
     for (let [name, value] of Object.entries(args)) {
       if (this.placeholders.includes(name)) {
-        const placeholder = placeholderOf(name);
-        localVarTemplate = localVarTemplate.replace(placeholder, String(value));
-      } else unexpectedArgs.push(name);
+        const metadata = { name, value, option: this.cmd.args.get(name) };
+        localVarTemplate = renderOnItsPlaceholder(
+          localVarTemplate,
+          placeholderOf(name),
+          metadata
+        );
+      } else {
+        unexpectedArgs.push(name);
+      }
     }
 
     const remainingPlaceholder =
@@ -50,7 +56,7 @@ export class PreparedRunner implements PreparedRunnable {
       throw UnexpectedArgException(this.rawTemplate, unexpectedArgs);
     }
 
-    exec(localVarTemplate, console.log);
+    return exec(localVarTemplate);
   }
 
   private template() {

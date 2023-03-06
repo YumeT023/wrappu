@@ -1,9 +1,12 @@
 import { execSync as run } from "node:child_process";
+import { RuntimeCmdException } from "../errors/RuntimeCmdException";
 
-export const exec = (cmd: string, callback?: (out: string) => any) => {
-  const localVarOutput = run(cmd, { encoding: "utf8" });
-  if (callback) {
-    callback(localVarOutput)
+export const exec = (cmd: string) => {
+  try {
+    return run(cmd, {
+      encoding: "utf8",
+    }).trim();
+  } catch (err) {
+    throw RuntimeCmdException(err.message);
   }
-  return localVarOutput;
 };
