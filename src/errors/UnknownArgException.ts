@@ -1,4 +1,4 @@
-import { interpolate } from "../utils/interpolate";
+import { interpolate } from "../utils/placeholder";
 import { Exception } from "../@types/error";
 import { normalize } from "./utils/normalize";
 import { Code } from "../constant/error";
@@ -11,7 +11,7 @@ class UnknownArg implements Exception {
   name: string;
 
   constructor(arg: string, cmd: string) {
-    this.code = Code.C200;
+    this.code = Code.UNKNOWN_ARG;
     this.message = interpolate(UnknownArg.TEMPLATE, arg, cmd);
     this.name = UnknownArgException.name;
   }

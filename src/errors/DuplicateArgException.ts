@@ -1,6 +1,6 @@
 import { Exception } from "../@types/error";
 import { Code } from "../constant/error";
-import { interpolate } from "../utils/interpolate";
+import { interpolate } from "../utils/placeholder";
 import { normalize } from "./utils/normalize";
 
 class DuplicateArg implements Exception {
@@ -10,7 +10,7 @@ class DuplicateArg implements Exception {
   name: string;
 
   constructor(arg: string, cmd: string) {
-    this.code = Code.C300;
+    this.code = Code.DUPLICATED_ARG;
     this.message = interpolate(DuplicateArg.TEMPLATE, arg, cmd);
     this.name = DuplicateArgException.name;
   }

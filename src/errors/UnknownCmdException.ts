@@ -1,6 +1,6 @@
 import { Exception } from "../@types/error";
 import { Code } from "../constant/error";
-import { interpolate } from "../utils/interpolate";
+import { interpolate } from "../utils/placeholder";
 import { normalize } from "./utils/normalize";
 
 class UnknownCmd implements Exception {
@@ -10,7 +10,7 @@ class UnknownCmd implements Exception {
   name: string;
 
   constructor(cmd: string) {
-    this.code = Code.C201;
+    this.code = Code.UNKNOWN_CMD;
     this.message = interpolate(UnknownCmd.TEMPLATE, cmd);
     this.name = UnknownCmdException.name;
   }
