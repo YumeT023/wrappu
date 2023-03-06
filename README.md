@@ -52,7 +52,8 @@ While creating an argument, there are two options I need to consider:
 - asAlias ?
 
 ```typescript
-import { Cmd, ArgType } from "./arg";
+import { Cmd } from "@yumii.saiko/wrappu";
+import { ArgType } from '@yumii.saiko/wrappu/constant/arg'
 
 const init = Cmd.create("init");
 
@@ -70,8 +71,6 @@ Yeah, they are beautiful but isn't there any (fecking) way to register many args
 No... but you can use chaining hehe :)
 
 ```typescript
-import { Cmd, ArgType } from "./arg";
-
 const init = Cmd.create("init")
   .arg("template")
   .arg("quiet", { type: ArgType.BOOL })
@@ -100,6 +99,8 @@ const git = Cli.wrap("C:\\Program Files\\Git\\cmd\\git.exe");
 Note that it is better to pass the absolute path from the cli to the `wrap` function rather than its name. Indeed,
 passing the name of the cli, the wrap function will need to find/ensure that it exists, and it could
 be a little slow.
+
+> `@important>` write the cli name uniquely for now
 
 `register command>`
 
