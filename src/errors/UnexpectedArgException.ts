@@ -10,7 +10,7 @@ class UnexpectedArg implements Exception {
   name: string;
 
   constructor(template: string, args: string[]) {
-    this.code = Code.UNKNOWN_CMD;
+    this.code = Code.UNEXPECTED_ARG;
     this.message = interpolate(
       UnexpectedArg.TEMPLATE,
       args.join(", "),
