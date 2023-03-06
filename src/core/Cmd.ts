@@ -36,7 +36,7 @@ export class Cmd implements CMD {
         throw UnknownArgException(name, this.name);
       }
 
-      validateArg(name, value, this.name, option);
+      validateArg(name, String(value), this.name, option);
     }
 
     return this;

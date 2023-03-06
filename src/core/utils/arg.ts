@@ -37,3 +37,19 @@ export const renderArgTemplate = (
       return pre.concat(name, sep, placeholderOf(name));
   }
 };
+
+export const renderOnItsPlaceholder = (
+  template: string,
+  placeholder: string,
+  argMetadata: ArgMetadata
+) => {
+  const { option, value: val, name } = argMetadata;
+
+  let value = String(val);
+
+  if (option.type === ArgType.BOOL) {
+    value = isTrue(val) ? prefix(option).concat(name) : "";
+  }
+
+  return template.replace(placeholder, value);
+};
