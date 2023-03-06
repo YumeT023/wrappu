@@ -34,11 +34,11 @@ export class Runner implements Runnable {
     this.memberVarCommandLine = [this.path, this.cmd.name, ...temp];
   }
 
-  raw(): string {
+  raw() {
     return this.memberVarCommandLine.join(" ");
   }
 
-  run(): void {
-    exec(this.memberVarCommandLine.join("  "), console.log);
+  run() {
+    return exec(this.memberVarCommandLine.join("  "));
   }
 }

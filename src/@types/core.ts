@@ -87,22 +87,27 @@ export interface Runnable {
 
   /**
    * run `normalized` cmd line
+   *
+   * @throws {RuntimeCmdException} whenever the command line failed to execute
    */
-  run(): void;
+  run(): string;
 }
 
 /**
  * Interface that specifies a cmd `prepared` runnable, which works just like `prepared statement` in
  * `sql` drivers such as: PDO,
  */
-export interface PreparedRunnable extends Omit<Runnable, 'run'> {
+export interface PreparedRunnable extends Omit<Runnable, "run"> {
   /**
    * unlike the raw() of Runnable, `raw(...)` function show the `cmd` with the specified
    * placeholders
    */
   raw(): string;
+
   /**
    * run `prepared` cmd with the passed args
+   *
+   * @throws {RuntimeCmdException} whenever the command line failed to execute
    */
-  run(args: SArgs): void;
+  run(args: SArgs): string;
 }
