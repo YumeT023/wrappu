@@ -27,7 +27,6 @@ export enum Code {
    */
   ARG_CONSTRAINT_VIOLATION = "C400",
 
-
   /**
    * missing arg value `violation`
    */
@@ -37,4 +36,9 @@ export enum Code {
    * unexpected `arg`
    */
   UNEXPECTED_ARG = "C600",
+
+  /**
+   * runtime cmd exception, which is a generic error called when a cmd fails
+   */
+  RUNTIME_CMD = "C613",
 }
