@@ -1,3 +1,20 @@
+## [1.3.5](https://github.com/YumeT023/wrappu/compare/v1.3.3...v1.3.5) (2023-03-07)
+
+
+### Bug Fixes
+
+* **preparedRunner:** mapping bool value on placeholder ([66d3f6a](https://github.com/YumeT023/wrappu/commit/66d3f6a923e06bc225c358e31bb3942d2042d9e5))
+* test the value in string type to avoid unexpected falsy condition ([824d5ff](https://github.com/YumeT023/wrappu/commit/824d5ff6abdee9e7293c34d4ea8776ad7f42209a))
+* unexpectedArgException error code ([3c17e99](https://github.com/YumeT023/wrappu/commit/3c17e99a03659a82dbe54022f730cd4f8396ff6c))
+
+
+### Features
+
+* **err:** RuntimeCmdException to specifies an err that come from the cmd output ([400167f](https://github.com/YumeT023/wrappu/commit/400167fcb5cfa506078c80c47e30c880c695b63b))
+* handle command internal error and return stdout instead of logging it ([e616254](https://github.com/YumeT023/wrappu/commit/e6162548c58c07299dbe1e399df99401ee7bccfc))
+
+
+
 ## [1.3.3](https://github.com/YumeT023/wrappu/compare/v1.2.4...v1.3.3) (2023-03-06)
 
 
