@@ -1,7 +1,11 @@
-import { ArgSeparator, ArgType } from "../../constant/arg";
-import { ArgMetadata, ArgOptions } from "../../@types/utils";
-import { placeholderOf } from "../../utils/placeholder";
-import { isTrue } from "../validation/utils";
+import {
+  ArgMetadata,
+  ArgOptions,
+  ArgSeparator,
+  ArgType,
+} from "../interface/cli_metadata";
+import { isTrue } from "../core/validation_util";
+import { placeholderOf } from "./interpolation";
 
 const prefix = (option: ArgOptions) => {
   let pre = "-";

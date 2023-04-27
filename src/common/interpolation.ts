@@ -22,5 +22,3 @@ export const removePlaceholder = (s: string) => {
 };
 
 export const placeholderOf = (s: string) => "{" + s + "}";
-
-export const placeholderWithName = /{.+?}/;
