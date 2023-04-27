@@ -15,7 +15,7 @@ to create this library which allow you to build a node.js with a `flexible API`
 $ npm install --save @yumii.saiko/wrappu
 ```
 
-## Usage
+## Usage (1.3.5, the one with the latest changes is in progress...)
 
 ### CMD
 

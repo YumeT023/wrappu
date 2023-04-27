@@ -1,5 +1,4 @@
-## [1.3.5](https://github.com/YumeT023/wrappu/compare/v1.3.3...v1.3.5) (2023-03-07)
-
+# [1.4.0](https://github.com/YumeT023/wrappu/compare/v1.3.5...v1.4.0) (2023-04-27)
 
 ### Bug Fixes
 
@@ -38,7 +37,6 @@
 ### Bug Fixes
 
 * launch IDE to open similar path on the current directory ([c640e08](https://github.com/YumeT023/wrappu/commit/c640e08c54b39e24093cf2badadb41256195286d))
-
 
 
 # [1.2.0](https://github.com/YumeT023/wrappu/compare/v1.1.0...v1.2.0) (2023-03-04)
