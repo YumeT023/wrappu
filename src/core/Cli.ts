@@ -1,11 +1,11 @@
-import { CliWrapper, CMD, PreparedRunnable } from "../@types/core";
-import { Commands, SArgs } from "../@types/utils";
+import { Commands, SArgs } from "../interface/cli_metadata";
 import { PreparedRunner, Runner } from "./runner";
-import { DuplicatedCmdException, UnknownCmdException } from "../errors";
-import { resolveCli } from "../utils/cli";
+import { DuplicatedCmd, UnknownCmd, WrappuError } from "../common/error";
+import { CLI, Command } from "../interface/cli";
+import { getCliPath } from "../common/command_util";
 
 // TODO: disallow to instantiate directly the Cli, both in js and ts
-export class Cli implements CliWrapper {
+export class Wrapper implements CLI {
   readonly path: string;
   commands: Commands;
 
@@ -14,42 +14,32 @@ export class Cli implements CliWrapper {
     this.commands = new Map();
   }
 
-  public static wrap(path: string) {
-    return new this(resolveCli(path));
+  public static wrap(cliName: string) {
+    const path = getCliPath(cliName);
+    return new this(path);
   }
 
-  cmd(cmd: CMD) {
+  cmd(cmd: Command) {
     let name = cmd.name;
-
     if (this.commands.has(name)) {
-      throw DuplicatedCmdException(name);
+      WrappuError.throw(new DuplicatedCmd(name));
     }
-
     this.commands.set(name, cmd);
     return this;
   }
 
-  setup(cmd: string, args: SArgs = {}) {
-    let command = this.commands.get(cmd);
+  setup(cmd: string, ...args: Array<SArgs | string>) {
+    const command = this.commands.get(cmd);
+    if (!command) WrappuError.throw(new UnknownCmd(cmd));
 
-    if (!command) {
-      throw UnknownCmdException(cmd);
+    let arg = args[0];
+    if (args.length > 1 || typeof arg === "string") {
+      const placeholders = args as string[];
+      command.checkContainArgs(placeholders);
+      return new PreparedRunner(this.path, command, placeholders);
     }
-
-    command.validateArgsConstraints(args);
-
-    return new Runner(this.path, command, args);
-  }
-
-  prepare(cmd: string, ...placeholders: string[]): PreparedRunnable {
-    let command = this.commands.get(cmd);
-
-    if (!command) {
-      throw UnknownCmdException(cmd);
-    }
-
-    command.checkContainArgs(placeholders);
-
-    return new PreparedRunner(this.path, command, placeholders);
+    const sArgs = (arg || {}) as SArgs;
+    command.validateArgsConstraints(sArgs);
+    return new Runner(this.path, command, sArgs);
   }
 }

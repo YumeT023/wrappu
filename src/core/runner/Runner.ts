@@ -1,44 +1,44 @@
-import { ArgMetadata, ImmutableCMD, SArgs } from "../../@types/utils";
-import { Runnable } from "../../@types/core";
-import { renderArgValue } from "../utils/arg";
-import { exec } from "../../utils/cmd";
+import { Runnable } from "./runnable";
+import {
+  ArgMetadata,
+  SArgs,
+  UnmodifiableCmd,
+} from "../../interface/cli_metadata";
+import { renderArgValue } from "../../common/arg_util";
+import { executeCommand } from "../../common/command_util";
 
 export class Runner implements Runnable {
-  readonly cmd: ImmutableCMD;
-  readonly path: string;
-  private memberVarCommandLine: string[];
-  private readonly args: SArgs;
+  private _command: string;
 
-  constructor(path: string, cmd: ImmutableCMD, args: SArgs) {
-    this.cmd = cmd;
-    this.args = args;
-    this.path = path;
-
-    this.setupCMD();
-  }
-
-  private setupCMD() {
-    let temp = [];
-
-    for (let [name, value] of Object.entries(this.args)) {
-      const option = this.cmd.args.get(name);
-      const metadata: ArgMetadata = {
-        name,
-        value,
-        option,
-      };
-
-      temp.push(renderArgValue(metadata));
-    }
-
-    this.memberVarCommandLine = [this.path, this.cmd.name, ...temp];
+  constructor(
+    readonly path: string,
+    readonly cmd: UnmodifiableCmd,
+    private readonly args: SArgs
+  ) {
+    this._build();
   }
 
   raw() {
-    return this.memberVarCommandLine.join(" ");
+    return this._command;
   }
 
   run() {
-    return exec(this.memberVarCommandLine.join("  "));
+    return executeCommand(this._command);
+  }
+
+  private _build() {
+    const temp = [];
+
+    for (let name in this.args) {
+      const meta: ArgMetadata = {
+        name,
+        value: this.args[name],
+        option: this.cmd.args.get(name),
+      };
+
+      temp.push(renderArgValue(meta));
+    }
+    const truncated = temp.join(" ");
+    this._command = `${this.path} ${this.cmd.name} ${truncated}`;
   }
 }
